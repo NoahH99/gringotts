@@ -21,6 +21,11 @@ spring:
 discord:
   token: ${DISCORD_TOKEN:}
 
+logging:
+  level:
+    net.dv8tion.jda: DEBUG
+    com.noahhendrickson: DEBUG
+
 management:
   endpoints:
     web:
