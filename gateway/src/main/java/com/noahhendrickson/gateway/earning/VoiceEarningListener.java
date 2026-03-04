@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.events.guild.voice.GuildVoiceSelfDeafenEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceUpdateEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 @Component

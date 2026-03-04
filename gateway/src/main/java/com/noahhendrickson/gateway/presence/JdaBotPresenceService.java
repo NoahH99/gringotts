@@ -35,10 +35,10 @@ public class JdaBotPresenceService implements BotPresenceService {
 
     private Activity jdaActivity(BotActivity activity) {
         return switch (activity.type()) {
-            case PLAYING    -> Activity.playing(activity.text());
-            case WATCHING   -> Activity.watching(activity.text());
-            case LISTENING  -> Activity.listening(activity.text());
-            case COMPETING  -> Activity.competing(activity.text());
+            case PLAYING -> Activity.playing(activity.text());
+            case WATCHING -> Activity.watching(activity.text());
+            case LISTENING -> Activity.listening(activity.text());
+            case COMPETING -> Activity.competing(activity.text());
         };
     }
 }
