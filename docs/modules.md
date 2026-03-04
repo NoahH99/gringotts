@@ -25,6 +25,7 @@ runtime
 ## Modules
 
 ### `kernel`
+
 **Role:** Core domain layer.
 
 The innermost module. Contains shared domain types, value objects, interfaces, and any logic that
@@ -36,6 +37,7 @@ Nothing in `kernel` knows about Spring, JDA, JPA, or any other framework.
 ---
 
 ### `ledger`
+
 **Role:** Financial business logic.
 
 Implements the accounting and transaction rules of the system — account balances, transfers, audit
@@ -45,6 +47,7 @@ is stored or how commands arrive.
 ---
 
 ### `gateway`
+
 **Role:** Discord bot interface.
 
 Owns the JDA lifecycle and all inbound Discord interactions (slash commands, message events, button
@@ -57,6 +60,7 @@ cleanly in environments without a bot token.
 ---
 
 ### `infra-persistence`
+
 **Role:** Database access layer.
 
 Contains all JPA entities, Spring Data repositories, and Flyway migrations. Responsible for
@@ -69,6 +73,7 @@ incrementally.
 ---
 
 ### `infra-observability`
+
 **Role:** Metrics and health reporting.
 
 Exposes operational visibility via Spring Boot Actuator and Micrometer. Publishes a Prometheus
@@ -80,6 +85,7 @@ Actuator endpoints exposed: `health`, `info`, `metrics`, `prometheus`.
 ---
 
 ### `runtime`
+
 **Role:** Application entry point and wiring.
 
 The only module that carries the Spring Boot plugin and produces an executable fat-jar. Its sole

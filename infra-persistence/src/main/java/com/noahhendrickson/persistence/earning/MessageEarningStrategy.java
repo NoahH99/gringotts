@@ -5,6 +5,7 @@ import com.noahhendrickson.kernel.earning.EarningSource;
 import com.noahhendrickson.kernel.earning.MessageEarningEvent;
 import com.noahhendrickson.persistence.entity.GuildEconomyConfigEntity;
 import org.springframework.stereotype.Component;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 @Component

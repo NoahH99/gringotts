@@ -1,6 +1,7 @@
 package com.noahhendrickson.gateway.earning;
 
 import org.springframework.stereotype.Component;
+
 import java.time.Instant;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

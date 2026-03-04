@@ -9,6 +9,7 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class VoiceTickScheduler {
     private final ApplicationEventPublisher eventPublisher;
 
     public VoiceTickScheduler(ObjectProvider<JDA> jdaProvider, VoiceSessionTracker tracker,
-                               EarningEventFactory factory, ApplicationEventPublisher eventPublisher) {
+                              EarningEventFactory factory, ApplicationEventPublisher eventPublisher) {
         this.jdaProvider = jdaProvider;
         this.tracker = tracker;
         this.factory = factory;
