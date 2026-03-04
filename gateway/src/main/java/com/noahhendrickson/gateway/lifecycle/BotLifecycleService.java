@@ -20,6 +20,6 @@ public class BotLifecycleService {
 
     public void onReady(String botName) {
         log.info("Bot online: {}", botName);
-        presenceService.setPresence(BotStatus.READY, BotActivity.watching("your Gringotts account"));
+        presenceService.setPresence(BotStatus.MAINTENANCE, BotActivity.playing("Currently in development..."));
     }
 }
