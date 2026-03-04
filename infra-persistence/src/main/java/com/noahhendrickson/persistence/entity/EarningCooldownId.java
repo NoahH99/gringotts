@@ -1,9 +1,12 @@
 package com.noahhendrickson.persistence.entity;
 
+import com.noahhendrickson.kernel.earning.EarningSource;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -14,6 +17,7 @@ public class EarningCooldownId implements Serializable {
     private Long memberId;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(name = "source", nullable = false, columnDefinition = "earning_source")
     private EarningSource source;
 
