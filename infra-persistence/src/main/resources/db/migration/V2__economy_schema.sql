@@ -43,27 +43,29 @@ CREATE TABLE guilds (
 -- ---------------------------------------------------------------------------
 
 CREATE TABLE guild_economy_config (
-    guild_id             BIGINT        PRIMARY KEY REFERENCES guilds(id) ON DELETE CASCADE,
-    text_award_min       INTEGER       NOT NULL DEFAULT 1,
-    text_award_max       INTEGER       NOT NULL DEFAULT 10,
-    text_award_chance    NUMERIC(5,4)  NOT NULL DEFAULT 0.1500,
-    text_cooldown_secs   INTEGER       NOT NULL DEFAULT 60,
-    voice_tick_secs      INTEGER       NOT NULL DEFAULT 60,
-    voice_award_per_tick INTEGER       NOT NULL DEFAULT 5,
-    voice_cooldown_secs  INTEGER       NOT NULL DEFAULT 0,
-    deposit_fee_bps      INTEGER       NOT NULL DEFAULT 0,
-    withdraw_fee_bps     INTEGER       NOT NULL DEFAULT 0,
-    created_at           TIMESTAMPTZ   NOT NULL DEFAULT NOW(),
-    updated_at           TIMESTAMPTZ   NOT NULL DEFAULT NOW(),
+    guild_id               BIGINT        PRIMARY KEY REFERENCES guilds(id) ON DELETE CASCADE,
+    text_award_min         INTEGER       NOT NULL DEFAULT 3,
+    text_award_max         INTEGER       NOT NULL DEFAULT 10,
+    text_award_chance      NUMERIC(5,4)  NOT NULL DEFAULT 0.7500,
+    text_cooldown_secs     INTEGER       NOT NULL DEFAULT 60,
+    voice_tick_secs        INTEGER       NOT NULL DEFAULT 120,
+    voice_award_min        INTEGER       NOT NULL DEFAULT 1,
+    voice_award_max        INTEGER       NOT NULL DEFAULT 2,
+    voice_min_duration_secs INTEGER      NOT NULL DEFAULT 600,
+    deposit_fee_bps        INTEGER       NOT NULL DEFAULT 0,
+    withdraw_fee_bps       INTEGER       NOT NULL DEFAULT 0,
+    created_at             TIMESTAMPTZ   NOT NULL DEFAULT NOW(),
+    updated_at             TIMESTAMPTZ   NOT NULL DEFAULT NOW(),
 
-    CONSTRAINT chk_gec_text_range    CHECK (text_award_min >= 0 AND text_award_max >= text_award_min),
-    CONSTRAINT chk_gec_chance        CHECK (text_award_chance BETWEEN 0 AND 1),
-    CONSTRAINT chk_gec_text_cd       CHECK (text_cooldown_secs  >= 0),
-    CONSTRAINT chk_gec_voice_tick    CHECK (voice_tick_secs      > 0),
-    CONSTRAINT chk_gec_voice_award   CHECK (voice_award_per_tick > 0),
-    CONSTRAINT chk_gec_voice_cd      CHECK (voice_cooldown_secs >= 0),
-    CONSTRAINT chk_gec_deposit_fee   CHECK (deposit_fee_bps  BETWEEN 0 AND 10000),
-    CONSTRAINT chk_gec_withdraw_fee  CHECK (withdraw_fee_bps BETWEEN 0 AND 10000)
+    CONSTRAINT chk_gec_text_range      CHECK (text_award_min >= 0 AND text_award_max >= text_award_min),
+    CONSTRAINT chk_gec_chance          CHECK (text_award_chance BETWEEN 0 AND 1),
+    CONSTRAINT chk_gec_text_cd         CHECK (text_cooldown_secs        >= 0),
+    CONSTRAINT chk_gec_voice_tick      CHECK (voice_tick_secs            > 0),
+    CONSTRAINT chk_gec_voice_award_min CHECK (voice_award_min           >= 0),
+    CONSTRAINT chk_gec_voice_award_max CHECK (voice_award_max           >= voice_award_min),
+    CONSTRAINT chk_gec_voice_min_dur   CHECK (voice_min_duration_secs   >= 0),
+    CONSTRAINT chk_gec_deposit_fee     CHECK (deposit_fee_bps  BETWEEN 0 AND 10000),
+    CONSTRAINT chk_gec_withdraw_fee    CHECK (withdraw_fee_bps BETWEEN 0 AND 10000)
 );
 
 -- ---------------------------------------------------------------------------
@@ -142,3 +144,6 @@ CREATE INDEX idx_ledger_account_created
 -- reporting: filter ledger by event type
 CREATE INDEX idx_ledger_event_type_created
     ON ledger_entries (event_type, created_at DESC);
+
+-- Allow efficient lookup of all guild memberships for a given user
+CREATE INDEX idx_guild_members_user_id ON guild_members (user_id);

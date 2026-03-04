@@ -26,31 +26,34 @@ public class GuildEconomyConfigEntity {
     private GuildEntity guild;
 
     @Column(name = "text_award_min", nullable = false)
-    private int textAwardMin;
+    private int textAwardMin = 3;
 
     @Column(name = "text_award_max", nullable = false)
-    private int textAwardMax;
+    private int textAwardMax = 10;
 
     @Column(name = "text_award_chance", nullable = false, precision = 5, scale = 4)
-    private BigDecimal textAwardChance;
+    private BigDecimal textAwardChance = new BigDecimal("0.7500");
 
     @Column(name = "text_cooldown_secs", nullable = false)
-    private int textCooldownSecs;
+    private int textCooldownSecs = 60;
 
     @Column(name = "voice_tick_secs", nullable = false)
-    private int voiceTickSecs;
+    private int voiceTickSecs = 120;
 
-    @Column(name = "voice_award_per_tick", nullable = false)
-    private int voiceAwardPerTick;
+    @Column(name = "voice_award_min", nullable = false)
+    private int voiceAwardMin = 1;
 
-    @Column(name = "voice_cooldown_secs", nullable = false)
-    private int voiceCooldownSecs;
+    @Column(name = "voice_award_max", nullable = false)
+    private int voiceAwardMax = 2;
+
+    @Column(name = "voice_min_duration_secs", nullable = false)
+    private int voiceMinDurationSecs = 600;
 
     @Column(name = "deposit_fee_bps", nullable = false)
-    private int depositFeeBps;
+    private int depositFeeBps = 0;
 
     @Column(name = "withdraw_fee_bps", nullable = false)
-    private int withdrawFeeBps;
+    private int withdrawFeeBps = 0;
 
     @Column(name = "created_at", nullable = false)
     private OffsetDateTime createdAt;
@@ -126,20 +129,28 @@ public class GuildEconomyConfigEntity {
         this.voiceTickSecs = voiceTickSecs;
     }
 
-    public int getVoiceAwardPerTick() {
-        return voiceAwardPerTick;
+    public int getVoiceAwardMin() {
+        return voiceAwardMin;
     }
 
-    public void setVoiceAwardPerTick(int voiceAwardPerTick) {
-        this.voiceAwardPerTick = voiceAwardPerTick;
+    public void setVoiceAwardMin(int voiceAwardMin) {
+        this.voiceAwardMin = voiceAwardMin;
     }
 
-    public int getVoiceCooldownSecs() {
-        return voiceCooldownSecs;
+    public int getVoiceAwardMax() {
+        return voiceAwardMax;
     }
 
-    public void setVoiceCooldownSecs(int voiceCooldownSecs) {
-        this.voiceCooldownSecs = voiceCooldownSecs;
+    public void setVoiceAwardMax(int voiceAwardMax) {
+        this.voiceAwardMax = voiceAwardMax;
+    }
+
+    public int getVoiceMinDurationSecs() {
+        return voiceMinDurationSecs;
+    }
+
+    public void setVoiceMinDurationSecs(int voiceMinDurationSecs) {
+        this.voiceMinDurationSecs = voiceMinDurationSecs;
     }
 
     public int getDepositFeeBps() {
