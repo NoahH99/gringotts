@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +25,7 @@ public class DiscordConfig {
     @Bean
     public JDA jda(@Value("${discord.token}") String token,
                    List<ListenerAdapter> listeners) {
-        JDABuilder builder = JDABuilder.createLight(token)
+        JDABuilder builder = JDABuilder.createDefault(token)
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .setActivity(Activity.playing("Starting up..."))
                 .enableIntents(
